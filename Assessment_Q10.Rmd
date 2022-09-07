@@ -1,0 +1,49 @@
+---
+title: "Assessment Q10"
+author: "Tom Chamberlain"
+date: "2022-09-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r Q9 code chunk, include = TRUE }
+## Q9 - One way ANOVA ####
+
+data("InsectSprays")
+head(InsectSprays)
+help("InsectSprays")
+# data are in Long format - preferred 
+
+m_Q9 = aov(formula = count ~ spray,
+           data = InsectSprays)
+
+summary(m_Q9)
+# The effect of sprays significantly explains variation in insect counts (1-way ANOVA: F= 34.7, df 5,66, p < 0.0001)
+
+
+
+# Sprays A,B and F resulted on counts higher than the overall mean with a wide variation in counts.
+# Sprays C, D and F reduced the counts and had much smaller variability in the counts. 
+
+```
+
+
+```{r Q9 plot , echo = FALSE}
+boxplot(count ~ spray, data = InsectSprays,
+        ylab = "Insect count",
+        xlab = "Type of spray",
+        main = "Effect of different sprays in insect count")
+
+abline(h=mean(InsectSprays$count),
+       lty = 3 ,  col = "goldenrod", lwd = 3)
+
+legend(x=1.9, y = 26,
+       legend = "Overall mean",
+       lty = 3 ,  col = "goldenrod", lwd = 3 )
+
+```
+
